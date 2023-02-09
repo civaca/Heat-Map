@@ -7,12 +7,12 @@ fetch("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
 const w=500;
 const h=500;
 const padding=80;
-const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 //scale 
-const xScale=d3.scaleTime().domain([d3.min(dataset["monthlyVariance"],(d,i)=> d3.timeParse("%Y")(d["year"])),d3.max(dataset["monthlyVariance"],(d,i)=> d3.timeParse("%Y")(d["year"]))])
+const xScale=d3.scaleTime().domain([d3.min(dataset["monthlyVariance"],d=> d3.timeParse("%Y")(d["year"])),d3.max(dataset["monthlyVariance"],d=> d3.timeParse("%Y")(d["year"]))])
 .range([padding,w-padding])
 
-const yScale=d3.scaleTime().domain([d3.min(dataset["monthlyVariance"],(d,i)=>d3.timeParse("%m")(d["month"])),d3.max(dataset["monthlyVariance"],d=>d3.timeParse("%m")(d["month"]))])
+const yScale=d3.scaleTime().domain([d3.min(dataset["monthlyVariance"],d=>d3.timeParse("%m")(d["month"])),d3.max(dataset["monthlyVariance"],d=>d3.timeParse("%m")(d["month"]))])
 .range([padding,h-padding])
 //creating svg
 const svg=d3.select("body")
@@ -35,7 +35,7 @@ const svg=d3.select("body")
     //Axis
 
     const xAxis=d3.axisBottom(xScale)
-     const yAxis=d3.axisLeft(yScale).tickFormat(d => monthNames[d.getMonth()])
+     const yAxis=d3.axisLeft(yScale).tickFormat(d => month[d.getMonth()])
      
 
     svg.append("g")
