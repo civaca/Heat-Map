@@ -3,4 +3,8 @@
 }
 body{
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+svg{
+    background-color: aqua;
 }
