@@ -112,20 +112,6 @@ const tooltip=d3.select("body")
         .style("text-anchor", "middle")
         .text("Variance")
         .attr("id","var")
-        
-        
-        console.log(d3.extent(dataset["monthlyVariance"],d=>d["variance"]))
-        
-        
-        
-        
-        
        
-       
-
-
-
-
-
     })//Closing fetching
 })//closing loaded
