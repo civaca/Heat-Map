@@ -21,7 +21,7 @@ const yScale=d3.scaleBand().domain([0,1,2,3,4,5,6,7,8,9,10,11])
 const tempScale=d3.scaleQuantize().domain(d3.extent(dataset["monthlyVariance"],d=>d["variance"]))//ColorsScale
         .range(['#0066CC', '#99CCFF', '#CCE5FF', '#FFFF99','#FF9933','#FFB266','#FF3333'])
 
-const scaleLegend=d3.scaleQuantize().domain(d3.extent(dataset["monthlyVariance"],d=>d["variance"]))//Legens Scale
+const scaleLegend=d3.scaleQuantile().domain(d3.extent(dataset["monthlyVariance"],d=>d["variance"]))//Legens Scale
 .range([w1/7,2*w1/7,3*w1/7,4*w1/7,5*w1/7,6*w1/7,7*w1/7,])
 
 //creating svg
@@ -73,7 +73,7 @@ const tooltip=d3.select("body")
     const xAxis=d3.axisBottom(xScale)
      const yAxis=d3.axisLeft(yScale)
      .tickFormat(d => month[d])
-     const zAxis=d3.axisBottom(scaleLegend).ticks(8).tickFormat((d)=>d+"°C")
+     const zAxis=d3.axisBottom(scaleLegend).tickFormat((d)=>d.toFixed(2)).tickValues([scaleLegend.domain()[0],...scaleLegend.quantiles()])
      
     svg.append("g")
         .attr("transform", "translate(0," + (h-padding) + ")")
@@ -102,7 +102,7 @@ const tooltip=d3.select("body")
        
  //legend axis       
         svg.append("g")
-        .attr("transform", "translate("+w1/7+"," + (h-padding1) + ")")
+        .attr("transform", "translate("+0+"," + (h-padding1) + ")")
         .call(zAxis)
         
         
@@ -114,7 +114,7 @@ const tooltip=d3.select("body")
         .attr("id","var")
         
         
-        
+        console.log(d3.extent(dataset["monthlyVariance"],d=>d["variance"]))
         
         
         
